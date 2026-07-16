@@ -1,0 +1,15 @@
+interface:
+  display_name: "McpBackend"
+  short_description: "Build and manage backends through MCP"
+  default_prompt: "Use $mcpbackend to create a secure backend for my app."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "mcpbackend"
+      description: "Hosted McpBackend project-management MCP server"
+      transport: "streamable_http"
+      url: "https://mcp.mcpbackend.com/mcp"
+
+policy:
+  allow_implicit_invocation: true
