@@ -16,10 +16,10 @@ If the McpBackend tools are unavailable, help the user add the endpoint to their
 ## Build a backend
 
 1. Establish the application's entities, relationships, expected queries, authentication needs, and who may read or write each record. Ask whether EU data residency is required before creating the project because jurisdiction is selected at creation.
-2. Inspect before changing. Use `list_projects`, `get_project`, and `get_schema` to find the intended project and its current state. Do not assume a table or column is absent.
+2. Inspect before changing. Use `list_projects` or `get_project`, then `get_schema` and `get_project_api` to find the intended project, its current schema, and its exact runtime API contract. Do not assume a table, column, route, or API host.
 3. Plan the smallest relational schema that supports the requested flows. Add indexes for fields the application will filter, sort, join, or enforce as unique.
-4. Create the project and tables, then read the schema again to verify the result. Use `add_column` only for additive changes to existing tables.
-5. Configure access explicitly. Enable end-user authentication when the app has users. Set every application table to `public`, `authenticated`, or `owner` reads and writes based on the requested behavior; never infer that public writes are acceptable.
+4. Create the project and tables, then read the schema and project API contract again to verify the result. Use `add_column` only for additive changes to existing tables.
+5. Configure access explicitly. Enable end-user authentication when the app has users. Set every application table to `public`, `authenticated`, or `owner` reads and writes based on the requested behavior; never infer that public writes are acceptable. Read [references/client-auth.md](references/client-auth.md) before implementing signup, login, session restoration, or authenticated browser access.
 6. Create credentials only after the schema and access rules are settled. Prefer per-table, least-privilege API keys. Treat returned API key and webhook secrets as one-time values: put them in the user's secret store or environment file and never commit or repeat them unnecessarily.
 7. Verify the final schema, access modes, and usage. Summarize project ID, tables, indexes, auth and RLS choices, created integrations, and the next application-side step. Do not reproduce secrets in the summary.
 
